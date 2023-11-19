@@ -4,8 +4,7 @@ Quaries used for Tableau Project
 */
 
 -- 1.
-
-SELECT *
+SELECT SUM(new_cases) as total_cases, SUM(new_deaths) as total_deaths, SUM(new_deaths)/(new_cases)*100 as DeathPercentage
 FROM PortfolioProject.CovidDeaths cd
 where continent != ''
 ORDER BY 1, 2;
