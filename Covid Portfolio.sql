@@ -1,8 +1,28 @@
+/*
+Quaries used for Tableau Project
+
+*/
+
+-- 1.
+
 SELECT *
 FROM PortfolioProject.CovidDeaths cd
 where continent != ''
-ORDER BY 3, 4;
+ORDER BY 1, 2;
 
+-- 2. 
+
+-- We take these out as they are not inluded in the above queries and want to stay consistent
+-- European Union is part of Europe
+
+SELECT location, SUM(new_deaths) as TotalDeathCount
+    FROM PortfolioProject.CovidDeaths cd 
+    WHERE continent = ''
+    and location not in ('Wrold','European Union','International')
+    GROUP BY location 
+    order by TotalDeathCount desc;
+
+/*
 SELECT location, date, total_cases, new_cases, total_deaths, population
 FROM PortfolioProject.CovidDeaths cd 
 ORDER BY 1, 2;
@@ -24,6 +44,9 @@ FROM PortfolioProject.CovidDeaths cd
 WHERE location like '%states%'
 ORDER BY 1, 2;
 
+*/
+
+--3
 -- Looking at countries with highest infection rate compared to populaton 
 
 SELECT location, population, MAX(total_cases) as HighestInfectionCount, Max((total_cases/population))*100 as CasesPercentage 
@@ -31,6 +54,18 @@ FROM PortfolioProject.CovidDeaths cd
 -- WHERE location like '%states%'
 Group by location, population 
 ORDER BY CasesPercentage DESC;
+
+-- 4.
+
+SELECT location, population, MAX(total_cases) as HighestInfectionCount, Max((total_cases/population))*100 as CasesPercentage 
+FROM PortfolioProject.CovidDeaths cd 
+-- WHERE location like '%states%'
+Group by location, population, date 
+ORDER BY CasesPercentage DESC;
+
+-- Queries I originally had, but excluded some because it created too long of video
+-- Here only in case you want to check them out
+
 
 -- Countries with highest death counts per population
 
